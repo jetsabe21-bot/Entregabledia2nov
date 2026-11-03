@@ -11,15 +11,18 @@
     "http"
   ],
   "paths": {
-    "/": {
+    "/api/menu": {
       "get": {
         "tags": [
-          "Tests"
+          "Menú"
         ],
-        "description": "",
+        "description": "Obtiene la lista completa de platillos y bebidas del menú.",
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
