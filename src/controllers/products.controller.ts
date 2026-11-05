@@ -20,7 +20,8 @@ export const getProduct = async (req: Request, res: Response): Promise<void> => 
   /* #swagger.tags = ['Menú']
      #swagger.description = 'Retorna un producto por su id' */
   try {
-    const id = parseInt(req.params.id);
+    const id = parseInt(Array.isArray(req.query.id) ? req.query.id[0] as string : (req.query.id as string || ''));
+
     const product = await getProductById(id);
     
     
@@ -62,11 +63,12 @@ export const updateProduct = async (req: Request, res: Response): Promise<void> 
      #swagger.description = 'Actualiza un producto existente' */
   try {
 
-    const id = parseInt(req.params.id);
+    const id = parseInt(Array.isArray(req.query.id) ? req.query.id[0] as string : (req.query.id as string || ''));
+
     const { name, description, price } = req.body;
 
 
-    const updatedProduct = await updateProduct(id, name, description, price);
+    const updatedProduct = await updateProductInDb(id, name, description, price);
 
     if (!updatedProduct) {
       res.status(404).json({ error: 'Not Found', message: 'El producto no existe para actualizar.' });

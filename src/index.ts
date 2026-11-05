@@ -3,6 +3,7 @@ import swaggerRouter from "./routes/swagger.router.js";
 import cors from "cors"
 // 1. IMPORTA TU NUEVO ROUTER AQUÍ (Quitamos el pool de aquí porque ya no se usa en index)
 import productRouter from './routes/products.routes.js'; 
+import customerRouter from './routes/customer.routes.js';
 
 const port = process.env.PORT; 
 
@@ -16,6 +17,7 @@ app.use("/api/docs", swaggerRouter)
 
 
 app.use('/api', productRouter);
+app.use('/api', customerRouter);
 
 app.listen(port, () => {
     console.log(`URL: http://localhost:${port}`);
