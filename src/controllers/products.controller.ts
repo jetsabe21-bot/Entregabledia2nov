@@ -7,15 +7,29 @@ import {
 } from '../Models/product.model.js';
 
 
+
+
 export const getMenu = async (req: Request, res: Response): Promise<void> => {
+  /* #swagger.tags = ['Clientes']
+     #swagger.description = 'Retorna todos los clientes registrados' */
   try {
-    const products = await getAllProducts(); 
+    
+    const maxPrice = req.query.maxPrice ? Number(req.query.maxPrice) : undefined;
+    const page = req.query.page ? Number(req.query.page) : undefined;
+    const limit = req.query.limit ? Number(req.query.limit) : undefined;
+
+    
+    const products = await getAllProducts(maxPrice, page, limit); 
+    
+    
     res.status(200).json(products);          
   } catch (error) {
     console.error('Error en getMenu:', error);
     res.status(500).json({ message: 'Error interno del servidor' });
   }
 };
+
+
 export const getProduct = async (req: Request, res: Response): Promise<void> => {
   /* #swagger.tags = ['Menú']
      #swagger.description = 'Retorna un producto por su id' */
