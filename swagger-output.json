@@ -13,7 +13,27 @@
   "paths": {
     "/api/menu": {
       "get": {
-        "description": "",
+        "tags": [
+          "Clientes"
+        ],
+        "description": "Retorna todos los clientes registrados",
+        "parameters": [
+          {
+            "name": "maxPrice",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
